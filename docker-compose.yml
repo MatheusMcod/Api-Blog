@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  app:
+    image: ts-api-blog
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: app
+    volumes:
+      - ./src:/app/src
+    tty: true
+    ports:
+      - 3000:3000
