@@ -6,6 +6,7 @@ import swaggerUi from 'swagger-ui-express';
 
 import Router from './routes';
 import ApiController from './controllers/api_controller';
+import AppDataSource from './typeorm/data-source';
 
 dotenv.config();
 
@@ -27,10 +28,17 @@ app.use(
       url: '/swagger.json'
     }
   })
-)
+);
 
 app.use(Router);
 
-app.listen(PORT, () => {
+(async () => {
+  await AppDataSource.initialize().catch((err) => {
+    console.log("Error connecting to the database: ", err);
+  });
+
+  app.listen(PORT, () => {
     console.log(`Port ${PORT}`);
-});
+  });
+})
+

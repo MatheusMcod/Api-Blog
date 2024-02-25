@@ -1,6 +1,8 @@
 version: '3.4'
 
 services:
+  db:
+    image: 
   app:
     image: ts-api-blog
     build:
